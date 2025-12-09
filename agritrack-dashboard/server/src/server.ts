@@ -1,15 +1,19 @@
 // Load environment variables FIRST before any imports
 import dotenv from 'dotenv';
 
-// Load .env file
+// Load .env file (optional in production - Render/Railway set env vars directly)
 const result = dotenv.config();
 if (result.error) {
-  console.error('❌ Error loading .env file:', result.error);
+  // Only show error in development (production uses platform env vars)
+  if (process.env.NODE_ENV !== 'production') {
+    console.error('❌ Error loading .env file:', result.error);
+  }
 } else {
   console.log('✅ .env file loaded successfully');
-  console.log('🔍 MONGODB_URI exists:', !!process.env.MONGODB_URI);
-  console.log('🔍 MONGODB_URI value:', process.env.MONGODB_URI?.substring(0, 30) + '...');
 }
+
+// Verify MongoDB URI is available (from .env or platform)
+console.log('🔍 MONGODB_URI exists:', !!process.env.MONGODB_URI);
 
 
 import express from 'express';
