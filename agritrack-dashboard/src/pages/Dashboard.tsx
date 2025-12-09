@@ -8,10 +8,11 @@ import { api } from "@/lib/api";
 import { useDefaultFarm } from "@/hooks/useFarm";
 
 export default function Dashboard() {
-  const { farmId } = useDefaultFarm();
-  const { expenses, loading: expensesLoading } = useExpenses();
+  const { farmId, loading: farmLoading, error: farmError } = useDefaultFarm();
+  const { expenses, loading: expensesLoading, error: expensesError } = useExpenses();
   const [metrics, setMetrics] = useState({ totalIncome: 0, totalExpenses: 0, profit: 0, incomeChange: 0, expenseChange: 0 });
   const [metricsLoading, setMetricsLoading] = useState(true);
+  const [metricsError, setMetricsError] = useState<Error | null>(null);
 
   useEffect(() => {
     const fetchMetrics = async () => {
@@ -20,10 +21,12 @@ export default function Dashboard() {
         return;
       }
       try {
+        setMetricsError(null);
         const response = await api.dashboard.getMetrics(farmId);
         setMetrics(response.data.metrics || { totalIncome: 0, totalExpenses: 0, profit: 0, incomeChange: 0, expenseChange: 0 });
       } catch (error) {
         console.error('Failed to fetch metrics:', error);
+        setMetricsError(error as Error);
       } finally {
         setMetricsLoading(false);
       }
@@ -31,8 +34,9 @@ export default function Dashboard() {
     fetchMetrics();
   }, [farmId]);
 
-  const recentExpenses = expenses.slice(0, 5);
-  const loading = expensesLoading || metricsLoading;
+  const recentExpenses = expenses?.slice(0, 5) || [];
+  const loading = farmLoading || expensesLoading || metricsLoading;
+  const hasError = farmError || expensesError || metricsError;
 
   if (loading) {
     return (
@@ -40,7 +44,47 @@ export default function Dashboard() {
         <div className="text-center">
           <Loader2 className="h-8 w-8 animate-spin text-primary mx-auto mb-4" />
           <p className="text-muted-foreground">Loading dashboard...</p>
+          <p className="text-xs text-muted-foreground mt-2">
+            {farmLoading && "Connecting to backend..."}
+            {!farmLoading && (expensesLoading || metricsLoading) && "Loading your data..."}
+          </p>
         </div>
+      </div>
+    );
+  }
+
+  // Show error message if backend is not responding
+  if (hasError || !farmId) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center p-4">
+        <Card className="max-w-md w-full">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Loader2 className="h-5 w-5 text-muted-foreground" />
+              Backend Connecting...
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p className="text-sm text-muted-foreground">
+              The server is waking up from sleep. This usually takes 30-60 seconds on the first request.
+            </p>
+            <div className="space-y-2">
+              <p className="text-xs text-muted-foreground">What's happening:</p>
+              <ul className="list-disc list-inside text-xs text-muted-foreground space-y-1 ml-2">
+                <li>Render free tier apps sleep after 15 minutes of inactivity</li>
+                <li>First request wakes up the backend server</li>
+                <li>Please wait and the page will load automatically</li>
+              </ul>
+            </div>
+            <Button 
+              onClick={() => window.location.reload()} 
+              className="w-full"
+            >
+              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+              Retry Connection
+            </Button>
+          </CardContent>
+        </Card>
       </div>
     );
   }
