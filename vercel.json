@@ -1,0 +1,11 @@
+{
+  "buildCommand": "cd agritrack-dashboard && npm install && npm run build",
+  "outputDirectory": "agritrack-dashboard/dist",
+  "installCommand": "cd agritrack-dashboard && npm install",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
