@@ -19,7 +19,11 @@ class DatabaseConnection {
           version: '1',
           strict: true,
           deprecationErrors: true,
-        }
+        },
+        retryWrites: true,
+        // TLS/SSL options for Atlas connections
+        tls: true,
+        tlsAllowInvalidCertificates: false, // Set to true only for debugging
       });
       
       await this.client.connect();
