@@ -9,7 +9,7 @@ import { useDefaultFarm } from "@/hooks/useFarm";
 
 export default function Dashboard() {
   const { farmId, loading: farmLoading, error: farmError } = useDefaultFarm();
-  const { expenses, loading: expensesLoading, error: expensesError } = useExpenses();
+  const { expenses = [], loading: expensesLoading, error: expensesError } = useExpenses();
   const [metrics, setMetrics] = useState({ totalIncome: 0, totalExpenses: 0, profit: 0, incomeChange: 0, expenseChange: 0 });
   const [metricsLoading, setMetricsLoading] = useState(true);
   const [metricsError, setMetricsError] = useState<Error | null>(null);
@@ -34,7 +34,7 @@ export default function Dashboard() {
     fetchMetrics();
   }, [farmId]);
 
-  const recentExpenses = expenses?.slice(0, 5) || [];
+  const recentExpenses = Array.isArray(expenses) ? expenses.slice(0, 5) : [];
   const loading = farmLoading || expensesLoading || metricsLoading;
   const hasError = farmError || expensesError || metricsError;
 
