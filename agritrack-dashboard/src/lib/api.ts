@@ -5,6 +5,7 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 // Create axios instance
 const apiClient: AxiosInstance = axios.create({
   baseURL: `${API_URL}/api`,
+  timeout: 10000, // 10 second timeout
   headers: {
     'Content-Type': 'application/json',
   },
@@ -35,6 +36,15 @@ apiClient.interceptors.request.use(
 apiClient.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {
+    if (error.code === 'ECONNABORTED' || error.code === 'ERR_NETWORK') {
+      console.error('Network error or timeout:', error.message);
+      // Don't redirect on network errors, just propagate the error
+      return Promise.reject({
+        ...error,
+        message: 'Network error. Please check your connection and try again.',
+      });
+    }
+    
     if (error.response?.status === 401) {
       // Clear session on 401
       localStorage.removeItem('agritrack_session');

@@ -55,7 +55,7 @@ export const SignIn = () => {
           title: 'Welcome back!',
           description: 'You have successfully signed in.',
         });
-        navigate('/dashboard');
+        navigate('/');
       }
     } catch (error) {
       toast({

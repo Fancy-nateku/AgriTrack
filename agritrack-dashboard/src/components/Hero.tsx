@@ -13,7 +13,7 @@ export const Hero = ({ onGetStarted }: HeroProps) => {
 
   const handleGetStarted = () => {
     if (user) {
-      navigate('/dashboard');
+      navigate('/');
     } else {
       navigate('/login');
     }

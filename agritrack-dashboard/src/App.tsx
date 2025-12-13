@@ -45,12 +45,12 @@ const AppContent = () => {
         onLoginClick={() => {}}
         onSignupClick={() => {}}
         isLoggedIn={!!user}
-        userEmail={user?.user_metadata?.username || "User"}
+        userEmail={user?.username || "User"}
         onLogout={signOut}
       />
       <Routes>
         <Route path="/" element={<Index onGetStarted={handleGetStarted} />} />
-        <Route path="/login" element={user ? <Navigate to="/dashboard" replace /> : <Login />} />
+        <Route path="/login" element={user ? <Navigate to="/" replace /> : <Login />} />
         <Route
           path="/dashboard"
           element={
