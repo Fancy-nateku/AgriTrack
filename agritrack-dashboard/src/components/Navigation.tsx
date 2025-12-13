@@ -32,14 +32,14 @@ export const Navigation = ({ onLoginClick, onSignupClick, isLoggedIn, userEmail,
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <a
-              href="#"
+            <Link
+              to="/"
               className={`text-sm font-medium transition-colors hover:text-primary ${
                 isActive("/") ? "text-primary" : "text-muted-foreground"
               }`}
             >
               Home
-            </a>
+            </Link>
             <Link
               to="/activity-plan"
               className={`text-sm font-medium transition-colors hover:text-primary ${
@@ -116,15 +116,15 @@ export const Navigation = ({ onLoginClick, onSignupClick, isLoggedIn, userEmail,
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-border animate-fade-in">
             <div className="flex flex-col space-y-4">
-              <a
-                href="#"
+              <Link
+                to="/"
                 onClick={() => setIsMenuOpen(false)}
                 className={`text-sm font-medium px-2 py-1 ${
                   isActive("/") ? "text-primary" : "text-muted-foreground"
                 }`}
               >
                 Home
-              </a>
+              </Link>
               <Link
                 to="/activity-plan"
                 onClick={() => setIsMenuOpen(false)}

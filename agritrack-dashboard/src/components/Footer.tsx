@@ -56,23 +56,23 @@ export const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <a 
-                href="#" 
+                href="/#contact" 
                 className="p-3 bg-background/50 hover:bg-primary rounded-lg text-foreground hover:text-primary-foreground transition-all duration-300 shadow-md hover:shadow-xl hover:scale-110"
-                aria-label="Facebook"
+                aria-label="Contact us"
               >
                 <Facebook className="h-5 w-5" />
               </a>
               <a 
-                href="#" 
+                href="/#contact" 
                 className="p-3 bg-background/50 hover:bg-primary rounded-lg text-foreground hover:text-primary-foreground transition-all duration-300 shadow-md hover:shadow-xl hover:scale-110"
-                aria-label="Twitter"
+                aria-label="Contact us"
               >
                 <Twitter className="h-5 w-5" />
               </a>
               <a 
-                href="#" 
+                href="/#contact" 
                 className="p-3 bg-background/50 hover:bg-primary rounded-lg text-foreground hover:text-primary-foreground transition-all duration-300 shadow-md hover:shadow-xl hover:scale-110"
-                aria-label="LinkedIn"
+                aria-label="Contact us"
               >
                 <Linkedin className="h-5 w-5" />
               </a>
@@ -85,17 +85,33 @@ export const Footer = () => {
               Resources
             </h3>
             <ul className="space-y-3">
-              {['Documentation', 'Video Tutorials', 'Case Studies', 'Blog', 'Help Center'].map((item) => (
-                <li key={item}>
-                  <a 
-                    href="#" 
-                    className="text-foreground/70 hover:text-primary transition-colors duration-200 text-sm font-medium flex items-center group"
-                  >
-                    <span className="w-0 group-hover:w-4 h-0.5 bg-primary transition-all duration-200 mr-0 group-hover:mr-2" />
-                    {item}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <a 
+                  href="/#contact" 
+                  className="text-foreground/70 hover:text-primary transition-colors duration-200 text-sm font-medium flex items-center group"
+                >
+                  <span className="w-0 group-hover:w-4 h-0.5 bg-primary transition-all duration-200 mr-0 group-hover:mr-2" />
+                  Help Center
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="/#features" 
+                  className="text-foreground/70 hover:text-primary transition-colors duration-200 text-sm font-medium flex items-center group"
+                >
+                  <span className="w-0 group-hover:w-4 h-0.5 bg-primary transition-all duration-200 mr-0 group-hover:mr-2" />
+                  Features
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="/#about" 
+                  className="text-foreground/70 hover:text-primary transition-colors duration-200 text-sm font-medium flex items-center group"
+                >
+                  <span className="w-0 group-hover:w-4 h-0.5 bg-primary transition-all duration-200 mr-0 group-hover:mr-2" />
+                  About Us
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -105,17 +121,33 @@ export const Footer = () => {
               Company
             </h3>
             <ul className="space-y-3">
-              {['About Us', 'Careers', 'Partners', 'Press Kit', 'Contact'].map((item) => (
-                <li key={item}>
-                  <a 
-                    href="#" 
-                    className="text-foreground/70 hover:text-primary transition-colors duration-200 text-sm font-medium flex items-center group"
-                  >
-                    <span className="w-0 group-hover:w-4 h-0.5 bg-primary transition-all duration-200 mr-0 group-hover:mr-2" />
-                    {item}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <a 
+                  href="/#about" 
+                  className="text-foreground/70 hover:text-primary transition-colors duration-200 text-sm font-medium flex items-center group"
+                >
+                  <span className="w-0 group-hover:w-4 h-0.5 bg-primary transition-all duration-200 mr-0 group-hover:mr-2" />
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="/#contact" 
+                  className="text-foreground/70 hover:text-primary transition-colors duration-200 text-sm font-medium flex items-center group"
+                >
+                  <span className="w-0 group-hover:w-4 h-0.5 bg-primary transition-all duration-200 mr-0 group-hover:mr-2" />
+                  Contact
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="/login" 
+                  className="text-foreground/70 hover:text-primary transition-colors duration-200 text-sm font-medium flex items-center group"
+                >
+                  <span className="w-0 group-hover:w-4 h-0.5 bg-primary transition-all duration-200 mr-0 group-hover:mr-2" />
+                  Careers
+                </a>
+              </li>
             </ul>
           </div>
         </div>
