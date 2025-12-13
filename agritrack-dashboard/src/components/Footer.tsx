@@ -1,7 +1,10 @@
 import { Sprout, Facebook, Twitter, Linkedin, ArrowRight } from "lucide-react";
 import { Button } from "./ui/button";
+import { useNavigate } from "react-router-dom";
 
 export const Footer = () => {
+  const navigate = useNavigate();
+
   return (
     <footer className="relative bg-gradient-to-br from-primary/20 via-accent/10 to-secondary border-t-2 border-primary/30 overflow-hidden">
       {/* Decorative background elements */}
@@ -25,6 +28,7 @@ export const Footer = () => {
             <Button 
               size="lg" 
               variant="secondary"
+              onClick={() => navigate('/login')}
               className="bg-background text-foreground hover:bg-background/90 font-semibold shadow-xl group whitespace-nowrap"
             >
               Start Free Today
