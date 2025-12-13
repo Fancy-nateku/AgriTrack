@@ -44,7 +44,7 @@ export const Contact = () => {
                   <div>
                     <h4 className="font-semibold text-foreground">Email</h4>
                     <p className="text-sm text-muted-foreground">
-                      support@agritrack.com
+                      agritracksupport@gmail.com
                     </p>
                     <p className="text-xs text-muted-foreground mt-1">
                       We respond within 24 hours
@@ -57,7 +57,7 @@ export const Contact = () => {
                   <div>
                     <h4 className="font-semibold text-foreground">Phone</h4>
                     <p className="text-sm text-muted-foreground">
-                      +254 (7) 123-4567
+                      +254726379173
                     </p>
                     <p className="text-xs text-muted-foreground mt-1">
                       Mon-Fri, 8am-6pm EST
