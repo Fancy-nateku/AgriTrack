@@ -1,61 +1,65 @@
-import { TrendingUp, PieChart, Receipt, Download } from "lucide-react";
+import { TrendingUp, PieChart, Receipt, FileText } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+
+const features = [
+  {
+    icon: Receipt,
+    title: "Expense Tracking",
+    description: "Record and categorize farm expenditures by category, supplier, and date. Full audit trail, zero guesswork.",
+    link: "/expenses",
+  },
+  {
+    icon: PieChart,
+    title: "Financial Analytics",
+    description: "Visualize spending patterns across seasons and categories. Identify cost drivers and optimize margins.",
+    link: "/dashboard",
+  },
+  {
+    icon: TrendingUp,
+    title: "Profit Monitoring",
+    description: "Real-time income-to-expense ratio with month-on-month comparison. Spot trends before they become problems.",
+    link: "/sales",
+  },
+  {
+    icon: FileText,
+    title: "Exportable Reports",
+    description: "Generate structured financial reports for tax submissions, bank loan applications, and seasonal reviews.",
+    link: "/reports",
+  },
+];
 
 export const Features = () => {
   const navigate = useNavigate();
 
-  const features = [
-    {
-      icon: Receipt,
-      title: "Track Every Expense",
-      description: "Easily record and categorize all your farm expenses in one place. Never lose track of where your money goes.",
-      link: "/expenses",
-    },
-    {
-      icon: PieChart,
-      title: "Visual Analytics",
-      description: "Understand your spending patterns with beautiful charts and graphs. Make data-driven decisions for your farm.",
-      link: "/dashboard",
-    },
-    {
-      icon: TrendingUp,
-      title: "Monitor Profitability",
-      description: "Track your income vs expenses in real-time. Know exactly how profitable your farm operations are.",
-      link: "/sales",
-    },
-    {
-      icon: Download,
-      title: "Generate Reports",
-      description: "Download detailed financial reports for tax season, loan applications, or business planning.",
-      link: "/reports",
-    },
-  ];
-
   return (
-    <section id="features" className="py-20 bg-background">
+    <section id="features" className="py-24 bg-secondary/30 border-y border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Everything You Need to Manage Farm Expenses
+        <div className="text-center mb-16">
+          <p className="text-xs font-bold uppercase tracking-widest text-primary mb-3">Platform Features</p>
+          <h2 className="text-4xl font-extrabold text-foreground tracking-tight mb-5">
+            Built for How Farmers Work
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Powerful features designed specifically for farmers to track, analyze, and optimize their farm spending.
+          <p className="text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">
+            Purpose-built tools for farm financial management. No bloat, no learning curve.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature, index) => (
             <div
               key={index}
               onClick={() => navigate(feature.link)}
-              className="group p-6 rounded-xl border border-border bg-card hover:shadow-lg transition-all duration-300 hover:-translate-y-1 animate-scale-in cursor-pointer"
-              style={{ animationDelay: `${index * 100}ms` }}
+              className="group p-7 rounded-lg border border-border bg-white hover:border-primary/30 transition-all duration-200 ease-out hover:-translate-y-[2px] hover:shadow-md cursor-pointer"
+              style={{
+                transitionTimingFunction: "cubic-bezier(0, 0, 0.2, 1)",
+                animationDelay: `${index * 80}ms`
+              }}
             >
-              <div className="mb-4 inline-flex p-3 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                <feature.icon className="h-6 w-6" />
+              <div className="mb-5 inline-flex p-3 rounded-md bg-secondary text-primary">
+                <feature.icon className="h-5 w-5" />
               </div>
-              <h3 className="text-xl font-semibold text-foreground mb-2">{feature.title}</h3>
-              <p className="text-muted-foreground">{feature.description}</p>
+              <h3 className="text-base font-bold text-foreground mb-2 tracking-tight">{feature.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
             </div>
           ))}
         </div>

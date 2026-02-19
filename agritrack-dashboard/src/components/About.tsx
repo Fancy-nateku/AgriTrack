@@ -3,31 +3,31 @@ import { Card, CardContent } from "@/components/ui/card";
 
 export const About = () => {
   return (
-    <section id="about" className="py-20 bg-background">
+    <section id="about" className="py-24 bg-background border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12 animate-fade-in">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+        <div className="text-center mb-12">
+          <p className="text-xs font-bold uppercase tracking-widest text-primary mb-3">Who We Are</p>
+          <h2 className="text-4xl font-extrabold text-foreground tracking-tight mb-5">
             About AgriTrack
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Empowering farmers with simple, powerful tools to manage expenses
-            and grow profitably.
+          <p className="text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed">
+            Built to give farmers a clear, honest view of their farm finances.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 mb-16">
-          <div className="space-y-6 animate-slide-up">
+          <div className="space-y-5">
             <h3 className="text-2xl font-bold text-foreground">Our Mission</h3>
-            <p className="text-muted-foreground">
-              AgriTrack was born from a simple belief: farmers deserve financial
-              tools as reliable as their equipment. We're committed to helping
-              agricultural businesses of all sizes track expenses, plan budgets,
-              and make data-driven decisions that lead to sustainable growth.
+            <p className="text-muted-foreground leading-relaxed">
+              AgriTrack was built on a straightforward premise: farmers deserve financial
+              tools as dependable as their equipment. We help agricultural operations
+              of all sizes track expenses, plan budgets, and make decisions grounded in
+              real data.
             </p>
-            <p className="text-muted-foreground">
-              Since 2025, we've helped thousands of farmers take control of
-              their finances, saving an average of 20% on operational costs
-              through better expense tracking and planning.
+            <p className="text-muted-foreground leading-relaxed">
+              We focus on clarity and speed. Whether you're tracking seed costs after
+              a planting season or reviewing annual profit margins before the harvest,
+              AgriTrack keeps the numbers in front of you.
             </p>
           </div>
 
@@ -51,10 +51,10 @@ export const About = () => {
               <CardContent className="pt-6 text-center">
                 <Users className="h-12 w-12 text-primary mx-auto mb-4" />
                 <h4 className="font-semibold text-foreground mb-2">
-                  5,000+ Farmers
+                  Community-First
                 </h4>
                 <p className="text-sm text-muted-foreground">
-                  Trusted by farming communities
+                  Built with and for Kenyan farmers
                 </p>
               </CardContent>
             </Card>
@@ -91,33 +91,28 @@ export const About = () => {
           </div>
         </div>
 
-        <div className="bg-primary/5 rounded-lg p-8 text-center animate-fade-in">
-          <h3 className="text-2xl font-bold text-foreground mb-4">
-            Why Choose AgriTrack?
+        <div className="bg-secondary rounded-lg p-10 border border-border">
+          <h3 className="text-2xl font-bold text-foreground mb-2 text-center">
+            Why AgriTrack
           </h3>
-          <div className="grid md:grid-cols-3 gap-8 mt-8">
+          <p className="text-sm text-muted-foreground text-center mb-8">Practical reasons. No fluff.</p>
+          <div className="grid md:grid-cols-3 gap-8">
             <div>
-              <h4 className="font-semibold text-foreground mb-2">
-                No Learning Curve
-              </h4>
-              <p className="text-sm text-muted-foreground">
-                Start tracking expenses in minutes, not days
+              <h4 className="font-bold text-foreground mb-2 text-sm uppercase tracking-wider">Minimal Setup</h4>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Register, create a farm, and start entering expenses immediately.
               </p>
             </div>
             <div>
-              <h4 className="font-semibold text-foreground mb-2">
-                Mobile-Friendly
-              </h4>
-              <p className="text-sm text-muted-foreground">
-                Track from the field or the office
+              <h4 className="font-bold text-foreground mb-2 text-sm uppercase tracking-wider">Works Anywhere</h4>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Responsive layout designed for phones and desktop equally.
               </p>
             </div>
             <div>
-              <h4 className="font-semibold text-foreground mb-2">
-                Affordable Pricing
-              </h4>
-              <p className="text-sm text-muted-foreground">
-                Plans that fit farms of every size
+              <h4 className="font-bold text-foreground mb-2 text-sm uppercase tracking-wider">Your Data</h4>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                All records are yours. Export reports whenever you need them.
               </p>
             </div>
           </div>

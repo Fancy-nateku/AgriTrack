@@ -8,6 +8,8 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { ProtectedRoute } from "@/components/auth/ProtectedRoute";
 import { useAuth } from "@/contexts/AuthContext";
+import { useEffect } from "react";
+import { pingBackend } from "@/lib/api";
 import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import Expenses from "./pages/Expenses";
@@ -23,7 +25,7 @@ const queryClient = new QueryClient({
       staleTime: 60 * 1000, // 1 minute
       gcTime: 5 * 60 * 1000, // 5 minutes (formerly cacheTime)
       retry: 1,
-      refetchOnWindowFocus: false, // Disable refetch on window focus for better UX
+      refetchOnWindowFocus: false,
       refetchOnReconnect: true,
     },
     mutations: {
@@ -34,6 +36,11 @@ const queryClient = new QueryClient({
 
 const AppContent = () => {
   const { user, signOut } = useAuth();
+
+  // Warm up the Render backend on page load so it's ready when the user logs in
+  useEffect(() => {
+    pingBackend();
+  }, []);
 
   const handleGetStarted = () => {
     // Navigation will be handled by the Index component

@@ -3,13 +3,24 @@ import axios, { AxiosInstance, AxiosError } from 'axios';
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 // Create axios instance
+// Timeout is 45s to handle Render free tier cold start (~30s spin-up time)
 const apiClient: AxiosInstance = axios.create({
   baseURL: `${API_URL}/api`,
-  timeout: 10000, // 10 second timeout
+  timeout: 45000,
   headers: {
     'Content-Type': 'application/json',
   },
 });
+
+// Silently ping the backend to wake it up before user interaction
+// Call this early in app initialization so cold starts don't block login
+export const pingBackend = async (): Promise<void> => {
+  try {
+    await axios.get(`${API_URL}/health`, { timeout: 45000 });
+  } catch {
+    // Ignore — this is a best-effort warm-up, not a blocker
+  }
+};
 
 // Request interceptor to add auth token
 apiClient.interceptors.request.use(
@@ -36,9 +47,15 @@ apiClient.interceptors.request.use(
 apiClient.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {
-    if (error.code === 'ECONNABORTED' || error.code === 'ERR_NETWORK') {
-      console.error('Network error or timeout:', error.message);
-      // Don't redirect on network errors, just propagate the error
+    if (error.code === 'ECONNABORTED') {
+      console.error('Request timeout:', error.message);
+      return Promise.reject({
+        ...error,
+        message: 'The server is starting up — this can take up to 30 seconds. Please try again shortly.',
+      });
+    }
+    if (error.code === 'ERR_NETWORK') {
+      console.error('Network error:', error.message);
       return Promise.reject({
         ...error,
         message: 'Network error. Please check your connection and try again.',

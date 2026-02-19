@@ -1,4 +1,4 @@
-import { TrendingUp, TrendingDown, Banknote, Loader2 } from "lucide-react";
+import { TrendingUp, TrendingDown, Banknote, RefreshCw } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -6,6 +6,7 @@ import { useExpenses } from "@/hooks/useExpenses";
 import { useState, useEffect } from "react";
 import { api } from "@/lib/api";
 import { useDefaultFarm } from "@/hooks/useFarm";
+import { DashboardSkeleton } from "@/components/skeletons/DashboardSkeleton";
 
 export default function Dashboard() {
   const { farmId, loading: farmLoading, error: farmError } = useDefaultFarm();
@@ -38,56 +39,37 @@ export default function Dashboard() {
   const loading = farmLoading || expensesLoading || metricsLoading;
   const hasError = farmError || expensesError || metricsError;
 
+  // Show skeleton during loading — better perceived performance
   if (loading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-center">
-          <Loader2 className="h-8 w-8 animate-spin text-primary mx-auto mb-4" />
-          <p className="text-muted-foreground">Loading dashboard...</p>
-          <p className="text-xs text-muted-foreground mt-2">
-            {farmLoading && "Connecting to backend..."}
-            {!farmLoading && (expensesLoading || metricsLoading) && "Loading your data..."}
-          </p>
-        </div>
-      </div>
-    );
+    return <DashboardSkeleton />;
   }
 
-  // Show error message if backend is not responding
+  // Clean error state — no platform-specific messaging
   if (hasError || !farmId) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center p-4">
-        <Card className="max-w-md w-full">
+        <Card className="max-w-sm w-full">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Loader2 className="h-5 w-5 text-muted-foreground" />
-              Backend Connecting...
-            </CardTitle>
+            <CardTitle className="text-base font-bold">Connection Issue</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <p className="text-sm text-muted-foreground">
-              The server is waking up from sleep. This usually takes 30-60 seconds on the first request.
+              Unable to load dashboard data. Check your connection and try again.
             </p>
-            <div className="space-y-2">
-              <p className="text-xs text-muted-foreground">What's happening:</p>
-              <ul className="list-disc list-inside text-xs text-muted-foreground space-y-1 ml-2">
-                <li>Render free tier apps sleep after 15 minutes of inactivity</li>
-                <li>First request wakes up the backend server</li>
-                <li>Please wait and the page will load automatically</li>
-              </ul>
-            </div>
-            <Button 
-              onClick={() => window.location.reload()} 
+            <Button
+              onClick={() => window.location.reload()}
               className="w-full"
+              variant="outline"
             >
-              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-              Retry Connection
+              <RefreshCw className="h-4 w-4 mr-2" />
+              Retry
             </Button>
           </CardContent>
         </Card>
       </div>
     );
   }
+
 
   return (
     <div className="min-h-screen bg-background">
